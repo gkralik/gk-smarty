@@ -1,5 +1,5 @@
 {
-    "name": "gkralik/GkSmarty",
+    "name": "gkralik/gk-smarty",
     "description": "Zend Framework 2 Module that provides a Smarty rendering strategy",
     "type": "library",
     "keywords": [

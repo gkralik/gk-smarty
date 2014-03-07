@@ -91,7 +91,9 @@ class SmartyRenderer implements RendererInterface, TreeRendererInterface
      */
     public function canRender($name)
     {
-        return $this->smarty->templateExists($name);
+        $resolvedName = $this->resolver->resolve($name);
+
+        return false !== $resolvedName;
     }
 
     /**

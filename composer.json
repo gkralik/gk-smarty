@@ -1,0 +1,32 @@
+{
+    "name": "gkralik/gk-smarty",
+    "description": "Zend Framework 2 Module that provides a Smarty rendering strategy",
+    "type": "library",
+    "keywords": [
+        "smarty",
+        "module",
+        "zf2"
+    ],
+    "homepage": "http://www.github.com/gkralik/GkSmarty/",
+    "authors": [
+        {
+            "name": "Gregor Kralik",
+            "email": "g.kralik@gmail.com",
+            "homepage": "http://www.github.com/gkralik"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "smarty/smarty": "3.1.16"
+    },
+
+    "autoload": {
+        "psr-0": {
+            "GkSmarty\\": "src/"
+        }
+    },
+    "require-dev": {
+        "zendframework/zend-view": "*",
+        "zendframework/zend-servicemanager": "*"
+    }
+}

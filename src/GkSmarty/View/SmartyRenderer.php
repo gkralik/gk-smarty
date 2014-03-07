@@ -101,21 +101,43 @@ class SmartyRenderer implements RendererInterface, TreeRendererInterface
             $values = (array)$model->getVariables();
         }
 
+        // check if we can render the template
         if(!$this->canRender($nameOrModel)) {
             return null;
         }
 
+        // handle tree rendering
+        if ($model && $this->canRenderTrees() && $model->hasChildren()) {
+            if (!isset($values['content'])) {
+                $values['content'] = '';
+            }
+            foreach($model as $child) {
+                /** @var \Zend\View\Model\ViewModel $child */
+                if ($this->canRender($child->getTemplate())) {
+                    $file = $this->resolver->resolve($child->getTemplate(), $this);
+                    $this->smarty->setTemplateDir(dirname($file));
+                    $childVariables = (array) $child->getVariables();
+                    $childVariables['this'] = $this;
+                    $this->smarty->assign($childVariables);
+                    return $this->smarty->fetch($file);
+                }
+                $child->setOption('has_parent', true);
+                $values['content'] .= $this->view->render($child);
+            }
+        }
+
+        // give the template awareness of the Renderer
         $values['this'] = $this;
 
+        // assign the variables
         $this->smarty->assign($values);
 
+        // resolve the template
         $file = $this->resolver->resolve($nameOrModel);
-
         $this->smarty->setTemplateDir(dirname($file));
 
-        $content = $this->smarty->fetch($file);
-
-        return $content;
+        // render
+        return $this->smarty->fetch($file);
     }
 
     /**
@@ -152,4 +174,15 @@ class SmartyRenderer implements RendererInterface, TreeRendererInterface
     {
         return $this->canRenderTrees;
     }
+
+    /**
+     * Clone Smarty engine.
+     */
+    public function __clone()
+    {
+        $this->smarty = clone $this->smarty;
+        $this->smarty->assign('this', $this);
+    }
+
+
 }

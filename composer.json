@@ -8,6 +8,7 @@
         "zf2"
     ],
     "homepage": "http://www.github.com/gkralik/GkSmarty/",
+    "license": "MIT",
     "authors": [
         {
             "name": "Gregor Kralik",

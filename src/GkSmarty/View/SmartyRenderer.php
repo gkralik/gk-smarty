@@ -6,7 +6,7 @@
  * Time: 9:32 AM
  */
 
-namespace src\GkSmarty\View;
+namespace GkSmarty\View;
 
 
 class SmartyRenderer

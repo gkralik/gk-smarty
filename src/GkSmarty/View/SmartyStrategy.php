@@ -6,7 +6,7 @@
  * Time: 9:33 AM
  */
 
-namespace src\GkSmarty\View;
+namespace GkSmarty\View;
 
 
 class SmartyStrategy

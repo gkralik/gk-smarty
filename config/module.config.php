@@ -5,7 +5,7 @@ return array(
         /**
          * Template suffix.
          */
-        'suffix' => 'twig',
+        'suffix' => 'tpl',
     ),
     /**
      * Register services.

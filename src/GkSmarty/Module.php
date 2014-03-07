@@ -6,7 +6,7 @@
  * Time: 9:19 AM
  */
 
-namespace src\GkSmarty;
+namespace GkSmarty;
 
 
 use Zend\ModuleManager\Feature\ConfigProviderInterface;

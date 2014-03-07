@@ -11,6 +11,7 @@ namespace GkSmarty\View;
 
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
+use Zend\View\ViewEvent;
 
 class SmartyStrategy implements ListenerAggregateInterface
 {
@@ -39,12 +40,13 @@ class SmartyStrategy implements ListenerAggregateInterface
      * implementation will pass this to the aggregate.
      *
      * @param EventManagerInterface $events
-     *
+     * @param int $priority
      * @return void
      */
-    public function attach(EventManagerInterface $events)
+    public function attach(EventManagerInterface $events, $priority = 100)
     {
-        // TODO: Implement attach() method.
+        $this->listeners[] = $events->attach(ViewEvent::EVENT_RENDERER, array($this, 'selectRenderer'), $priority);
+        $this->listeners[] = $events->attach(ViewEvent::EVENT_RESPONSE, array($this, 'injectResponse'), $priority);
     }
 
     /**
@@ -56,6 +58,44 @@ class SmartyStrategy implements ListenerAggregateInterface
      */
     public function detach(EventManagerInterface $events)
     {
-        // TODO: Implement detach() method.
+        foreach($this->listeners as $index => $listener) {
+            if($events->detach($listener)) {
+                unset($this->listeners[$index]);
+            }
+        }
+    }
+
+    /**
+     * Check if the renderer can load the requested template.
+     *
+     * @param ViewEvent $e
+     * @return bool|SmartyRenderer
+     */
+    public function selectRenderer(ViewEvent $e)
+    {
+        if($this->renderer->canRende($e->getModel()->getTemplate())) {
+            return $this->renderer;
+        }
+
+        return false;
+    }
+
+    /**
+     * Inject the response from the renderer.
+     *
+     * @param ViewEvent $e
+     */
+    public function injectResponse(ViewEvent $e)
+    {
+        $renderer = $e->getRenderer();
+        if($renderer !== $this->renderer) {
+            // not our renderer
+            return;
+        }
+
+        $result = $e->getResult();
+        $response = $e->getResponse();
+
+        $response->setContent($result);
     }
 }

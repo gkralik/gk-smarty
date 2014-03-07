@@ -7,7 +7,7 @@ return array(
          */
         'suffix' => 'tpl',
 
-        'compiled_templates_dir' => getcwd() . '/data/templates_c',
+        'compile_dir' => getcwd() . '/data/templates_c',
     ),
     /**
      * Register services.

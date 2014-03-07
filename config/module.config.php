@@ -8,6 +8,8 @@ return array(
         'suffix' => 'tpl',
 
         'compile_dir' => getcwd() . '/data/templates_c',
+
+        'cache_dir' => getcwd() . '/data/cache/templates',
     ),
     /**
      * Register services.

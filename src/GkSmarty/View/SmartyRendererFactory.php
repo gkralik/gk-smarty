@@ -27,7 +27,8 @@ class SmartyRendererFactory implements FactoryInterface
         $options = $serviceLocator->get('GkSmarty\ModuleOptions');
 
         $smarty = new \Smarty();
-        $smarty->setCacheDir($options->getCompileDir());
+        $smarty->setCompileDir($options->getCompileDir());
+        $smarty->setCacheDir($options->getCacheDir());
 
         return new SmartyRenderer(
             $serviceLocator->get('Zend\View\View'),

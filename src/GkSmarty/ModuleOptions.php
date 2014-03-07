@@ -24,6 +24,11 @@ class ModuleOptions extends AbstractOptions
     protected $compileDir;
 
     /**
+     * @var string
+     */
+    protected $cacheDir;
+
+    /**
      * @param string $suffix
      * @return self
      */
@@ -55,6 +60,22 @@ class ModuleOptions extends AbstractOptions
     public function getCompileDir()
     {
         return $this->compileDir;
+    }
+
+    /**
+     * @param string $cacheDir
+     */
+    public function setCacheDir($cacheDir)
+    {
+        $this->cacheDir = $cacheDir;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCacheDir()
+    {
+        return $this->cacheDir;
     }
 
 }

@@ -26,6 +26,7 @@
         }
     },
     "require-dev": {
-        "zendframework/zend-view": "*"
+        "zendframework/zend-view": "*",
+        "zendframework/zend-servicemanager": "*"
     }
 }

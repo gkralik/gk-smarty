@@ -23,7 +23,11 @@ class SmartyRendererFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
+        /** @var \GkSmarty\ModuleOptions $options */
+        $options = $serviceLocator->get('GkSmarty\ModuleOptions');
+
         $smarty = new \Smarty();
+        $smarty->setCacheDir($options->getCompileDir());
 
         return new SmartyRenderer(
             $serviceLocator->get('Zend\View\View'),

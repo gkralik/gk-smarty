@@ -19,6 +19,11 @@ class ModuleOptions extends AbstractOptions
     protected $suffix;
 
     /**
+     * @var string
+     */
+    protected $compileDir;
+
+    /**
      * @param string $suffix
      * @return self
      */
@@ -36,5 +41,20 @@ class ModuleOptions extends AbstractOptions
         return $this->suffix;
     }
 
+    /**
+     * @param string $compileDir
+     */
+    public function setCompileDir($compileDir)
+    {
+        $this->compileDir = $compileDir;
+    }
 
-} 
+    /**
+     * @return string
+     */
+    public function getCompileDir()
+    {
+        return $this->compileDir;
+    }
+
+}

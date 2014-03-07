@@ -6,6 +6,8 @@ return array(
          * Template suffix.
          */
         'suffix' => 'tpl',
+
+        'compiled_templates_dir' => getcwd() . '/data/templates_c',
     ),
     /**
      * Register services.

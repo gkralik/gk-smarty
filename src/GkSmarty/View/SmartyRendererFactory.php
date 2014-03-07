@@ -23,6 +23,12 @@ class SmartyRendererFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new SmartyRenderer();
+        $smarty = new \Smarty();
+
+        return new SmartyRenderer(
+            $serviceLocator->get('Zend\View\View'),
+            $smarty,
+            $serviceLocator->get('GkSmartyResolver')
+        );
     }
 }

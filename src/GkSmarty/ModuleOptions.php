@@ -6,7 +6,7 @@
  * Time: 9:26 AM
  */
 
-namespace src\GkSmarty;
+namespace GkSmarty;
 
 
 use Zend\Stdlib\AbstractOptions;

@@ -73,7 +73,7 @@ class SmartyStrategy implements ListenerAggregateInterface
      */
     public function selectRenderer(ViewEvent $e)
     {
-        if($this->renderer->canRende($e->getModel()->getTemplate())) {
+        if($this->renderer->canRender($e->getModel()->getTemplate())) {
             return $this->renderer;
         }
 

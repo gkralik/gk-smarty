@@ -12,10 +12,16 @@ return array(
      */
     'service_manager' => array(
         'aliases' => array(
+            'GkSmartyResolver' => 'GkSmarty\Smarty\SmartyResolver',
+            'GkSmartyTemplateMapResolver' => 'GkSmarty\Smarty\TemplateMapResolver',
+            'GkSmartyTemplatePathStack' => 'GkSmarty\Smarty\TemplatePathStack',
             'GkSmartyStrategy' => 'GkSmarty\View\SmartyStrategy',
             'GkSmartyRenderer' => 'GkSmarty\View\SmartyRenderer',
         ),
         'factories' => array(
+            'GkSmarty\Smarty\SmartyResolver' => 'GkSmarty\Smarty\SmartyResolverFactory',
+            'GkSmarty\Smarty\TemplateMapResolver' => 'GkSmarty\Smarty\TemplateMapResolverFactory',
+            'GkSmarty\Smarty\TemplatePathStack' => 'GkSmarty\Smarty\TemplatePathStackFactory',
             'GkSmarty\View\SmartyStrategy' => 'GkSmarty\View\SmartyStrategyFactory',
             'GkSmarty\View\SmartyRenderer' => 'GkSmarty\View\SmartyRendererFactory',
             'GkSmarty\ModuleOptions' => 'GkSmarty\ModuleOptionsFactory',

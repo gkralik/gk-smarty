@@ -6,7 +6,7 @@
  * Time: 9:27 AM
  */
 
-namespace src\GkSmarty;
+namespace GkSmarty;
 
 
 use Zend\ServiceManager\FactoryInterface;

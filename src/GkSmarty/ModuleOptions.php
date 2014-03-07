@@ -29,6 +29,11 @@ class ModuleOptions extends AbstractOptions
     protected $cacheDir;
 
     /**
+     * @var array
+     */
+    protected $smartyOptions;
+
+    /**
      * @param string $suffix
      * @return self
      */
@@ -76,6 +81,22 @@ class ModuleOptions extends AbstractOptions
     public function getCacheDir()
     {
         return $this->cacheDir;
+    }
+
+    /**
+     * @param array $smartyOptions
+     */
+    public function setSmartyOptions($smartyOptions)
+    {
+        $this->smartyOptions = $smartyOptions;
+    }
+
+    /**
+     * @return array
+     */
+    public function getSmartyOptions()
+    {
+        return $this->smartyOptions;
     }
 
 }

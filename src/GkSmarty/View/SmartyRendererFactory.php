@@ -30,6 +30,20 @@ class SmartyRendererFactory implements FactoryInterface
         $smarty->setCompileDir($options->getCompileDir());
         $smarty->setCacheDir($options->getCacheDir());
 
+        // set Smarty engine options
+        foreach ($options->getSmartyOptions() as $key => $value) {
+            $setter = 'set' . str_replace(
+                    ' ',
+                    '',
+                    ucwords(str_replace('_', ' ', $key))
+                );
+            if (method_exists($smarty, $setter)) {
+                $smarty->$setter($value);
+            } elseif (property_exists($smarty, $key)) {
+                $smarty->$key = $value;
+            }
+        }
+
         return new SmartyRenderer(
             $serviceLocator->get('Zend\View\View'),
             $smarty,

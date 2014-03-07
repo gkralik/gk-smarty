@@ -34,6 +34,11 @@ class ModuleOptions extends AbstractOptions
     protected $smartyOptions;
 
     /**
+     * @var array
+     */
+    protected $helperManager;
+
+    /**
      * @param string $suffix
      * @return self
      */
@@ -97,6 +102,14 @@ class ModuleOptions extends AbstractOptions
     public function getSmartyOptions()
     {
         return $this->smartyOptions;
+    }
+
+    /**
+     * @return array
+     */
+    public function getHelperManager()
+    {
+        return $this->helperManager;
     }
 
 }

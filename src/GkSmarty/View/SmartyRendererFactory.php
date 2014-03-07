@@ -44,10 +44,14 @@ class SmartyRendererFactory implements FactoryInterface
             }
         }
 
-        return new SmartyRenderer(
+        $renderer = new SmartyRenderer(
             $serviceLocator->get('Zend\View\View'),
             $smarty,
             $serviceLocator->get('GkSmartyResolver')
         );
+
+        $renderer->setHelperPluginManager($serviceLocator->get('GkSmartyHelperPluginManager'));
+
+        return $renderer;
     }
 }

@@ -40,6 +40,21 @@ class SmartyRenderer implements RendererInterface, TreeRendererInterface
      */
     protected $view;
 
+    /**
+     * @var HelperPluginManager
+     */
+    protected $helperPluginManager;
+
+    /**
+     * @var array Cache of plugins.
+     */
+    protected $__pluginsCache;
+
+    /**
+     * @param View $view
+     * @param Smarty $smarty
+     * @param ResolverInterface $resolver
+     */
     public function __construct(
         View $view,
         Smarty $smarty,
@@ -112,7 +127,7 @@ class SmartyRenderer implements RendererInterface, TreeRendererInterface
         }
 
         // check if we can render the template
-        if(!$this->canRender($nameOrModel)) {
+        if (!$this->canRender($nameOrModel)) {
             return null;
         }
 
@@ -121,12 +136,15 @@ class SmartyRenderer implements RendererInterface, TreeRendererInterface
             if (!isset($values['content'])) {
                 $values['content'] = '';
             }
-            foreach($model as $child) {
+            foreach ($model as $child) {
                 /** @var \Zend\View\Model\ViewModel $child */
                 if ($this->canRender($child->getTemplate())) {
-                    $file = $this->resolver->resolve($child->getTemplate(), $this);
+                    $file = $this->resolver->resolve(
+                        $child->getTemplate(),
+                        $this
+                    );
                     $this->smarty->setTemplateDir(dirname($file));
-                    $childVariables = (array) $child->getVariables();
+                    $childVariables = (array)$child->getVariables();
                     $childVariables['this'] = $this;
                     $this->smarty->assign($childVariables);
                     return $this->smarty->fetch($file);
@@ -194,5 +212,62 @@ class SmartyRenderer implements RendererInterface, TreeRendererInterface
         $this->smarty->assign('this', $this);
     }
 
+    /**
+     * Sets the HelperPluginManagers Renderer instance to $this.
+     * @param \GkSmarty\View\HelperPluginManager $helperPluginManager
+     */
+    public function setHelperPluginManager($helperPluginManager)
+    {
+        $helperPluginManager->setRenderer($this);
+        $this->helperPluginManager = $helperPluginManager;
+    }
 
+    /**
+     * @return \GkSmarty\View\HelperPluginManager
+     */
+    public function getHelperPluginManager()
+    {
+        return $this->helperPluginManager;
+    }
+
+    /**
+     * Magic method overloading
+     *
+     * Proxies calls to the attached HelperPluginManager.
+     * * Helpers without an __invoke() method are simply returned.
+     * * Helpers with an __invoke() method will be called and their return
+     *   value is returned.
+     *
+     * A cache is used to speed up successive calls to the same helper.
+     *
+     * @param string $name
+     * @param array $arguments
+     * @return mixed
+     */
+    public function __call($name, $arguments)
+    {
+        if (!isset($this->__pluginsCache[$name])) {
+            $this->__pluginsCache[$name] = $this->plugin($name);
+        }
+        if (is_callable($this->__pluginsCache[$name])) {
+            return call_user_func_array($this->__pluginsCache[$name], $arguments);
+        }
+        return $this->__pluginsCache[$name];
+    }
+
+    /**
+     * Retrieve plugin instance.
+     *
+     * Proxies to HelperPluginManager::get.
+     *
+     * @param string $name Plugin name.
+     * @param array $options Plugin options. Passed to the plugin constructor.
+     * @return \Zend\View\Helper\AbstractHelper
+     */
+    public function plugin($name, array $options = null)
+    {
+        return $this->getHelperPluginManager()
+            ->setRenderer($this)
+            ->get($name, $options);
+    }
 }

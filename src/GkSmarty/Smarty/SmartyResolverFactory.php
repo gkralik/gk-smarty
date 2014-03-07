@@ -26,7 +26,7 @@ class SmartyResolverFactory implements FactoryInterface
     {
         $resolver = new AggregateResolver();
         $resolver->attach($serviceLocator->get('GkSmartyTemplateMapResolver'));
-        $resolver->attach($serviceLocator->get('GkSmartyTemplatePathStackResolver'));
+        $resolver->attach($serviceLocator->get('GkSmartyTemplatePathStack'));
 
         return $resolver;
     }

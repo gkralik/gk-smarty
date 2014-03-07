@@ -39,7 +39,7 @@ The default plugin manager from ZF2 is added as a peering manager to ease using 
 This means
 
 You must register view helpers that require a renderer with GkSmarty's helper manager. Refer to `module.config.php` for an example.
-Some defaults have been taken care of for you (see [HelperPluginManager](https://github.com/gkralik/gk-smarty/tree/master/src/GkSmarty/View/HelperPluginManager) for details).
+Some defaults have been taken care of for you (see [HelperPluginManager](https://github.com/gkralik/gk-smarty/tree/master/src/GkSmarty/View/HelperPluginManager.php) for details).
 
 ## Acknowledgements
 

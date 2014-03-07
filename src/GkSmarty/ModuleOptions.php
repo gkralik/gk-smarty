@@ -105,6 +105,14 @@ class ModuleOptions extends AbstractOptions
     }
 
     /**
+     * @param array $helperManager
+     */
+    public function setHelperManager($helperManager)
+    {
+        $this->helperManager = $helperManager;
+    }
+
+    /**
      * @return array
      */
     public function getHelperManager()

@@ -27,7 +27,7 @@ class TemplatePathStackFactory implements FactoryInterface
         $options = $serviceLocator->get('GkSmarty\ModuleOptions');
 
         /** @var \Zend\View\Resolver\TemplatePathStack */
-        $templatePathStack = $serviceLocator->get('ViewTemplatePathStack');
+        $templatePathStack = $serviceLocator->create('ViewTemplatePathStack');
         $templatePathStack->setDefaultSuffix($options->getSuffix());
 
         return $templatePathStack;

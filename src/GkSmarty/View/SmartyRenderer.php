@@ -143,7 +143,7 @@ class SmartyRenderer implements RendererInterface, TreeRendererInterface
                         $child->getTemplate(),
                         $this
                     );
-                    $this->smarty->setTemplateDir(dirname($file));
+                    $this->smarty->addTemplateDir(dirname($file));
                     $childVariables = (array)$child->getVariables();
                     $childVariables['this'] = $this;
                     $this->smarty->assign($childVariables);
@@ -162,7 +162,7 @@ class SmartyRenderer implements RendererInterface, TreeRendererInterface
 
         // resolve the template
         $file = $this->resolver->resolve($nameOrModel);
-        $this->smarty->setTemplateDir(dirname($file));
+        $this->smarty->addTemplateDir(dirname($file));
 
         // render
         return $this->smarty->fetch($file);

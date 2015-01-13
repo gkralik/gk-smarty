@@ -29,6 +29,7 @@ class SmartyRendererFactory implements FactoryInterface
         $smarty = new \Smarty();
         $smarty->setCompileDir($options->getCompileDir());
         $smarty->setCacheDir($options->getCacheDir());
+        $smarty->setTemplateDir($options->getTemplateDir());
 
         // set Smarty engine options
         foreach ($options->getSmartyOptions() as $key => $value) {

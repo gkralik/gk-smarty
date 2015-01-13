@@ -27,6 +27,11 @@ class ModuleOptions extends AbstractOptions
      * @var string
      */
     protected $cacheDir;
+    
+    /**
+     * @var string
+     */
+    protected $templateDir;
 
     /**
      * @var array
@@ -86,6 +91,22 @@ class ModuleOptions extends AbstractOptions
     public function getCacheDir()
     {
         return $this->cacheDir;
+    }
+    
+    /**
+     * @param string $templateDir
+     */
+    public function setTemplateDir($templateDir)
+    {
+        $this->templateDir = $templateDir;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTemplateDir()
+    {
+        return $this->templateDir;
     }
 
     /**

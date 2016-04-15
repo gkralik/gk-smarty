@@ -2,6 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+
+## [1.1.0] - 2016-04-15
 ### Added
 - add option `use_smarty_bc`: Use the SmartyBC implementation instead of the new one
 
@@ -14,5 +16,6 @@ All notable changes to this project will be documented in this file.
 - Initial stable version
 
 
-[Unreleased]: https://github.com/gkralik/gk-smarty/compare/1.0.0...HEAD
+[Unreleased]: https://github.com/gkralik/gk-smarty/compare/1.1.0...HEAD
+[1.1.0]: https://github.com/gkralik/gk-smarty/compare/1.0.0...1.1.0
 [1.0.0]: https://github.com/gkralik/gk-smarty/compare/0.5.3...1.0.0

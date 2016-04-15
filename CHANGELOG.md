@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+### Added
+- add option `use_smarty_bc`: Use the SmartyBC implementation instead of the new one
+
 ### Changed
 - Update Smarty dependency: require `3.1.*`
 - HelperPluginManger: inject ServiceLocator to prevent deprecation notice in ZF >= 2.5

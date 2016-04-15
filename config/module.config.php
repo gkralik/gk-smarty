@@ -19,6 +19,10 @@ return array(
          */
         'smarty_options' => array(),
         /**
+         * Set to true to use the SmartyBC implementation.
+         */
+        'use_smarty_bc' => false,
+        /**
          * GkSmarty uses it's own HelperPluginManager (just for avoiding
          * conflicts with PhpRenderer). If you need to use helpers that
          * need access to the renderer, you have to register them here.

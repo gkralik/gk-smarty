@@ -26,7 +26,12 @@ class SmartyRendererFactory implements FactoryInterface
         /** @var \GkSmarty\ModuleOptions $options */
         $options = $serviceLocator->get('GkSmarty\ModuleOptions');
 
-        $smarty = new \Smarty();
+        if ($options->getUseSmartyBc()) {
+            $smarty = new \SmartyBC();
+        } else {
+            $smarty = new \Smarty();
+        }
+
         $smarty->setCompileDir($options->getCompileDir());
         $smarty->setCacheDir($options->getCacheDir());
 

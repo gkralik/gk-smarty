@@ -33,6 +33,9 @@ class ModuleOptions extends AbstractOptions
      */
     protected $smartyOptions;
 
+    /** @var bool */
+    protected $useSmartyBc;
+
     /**
      * @var array
      */
@@ -102,6 +105,22 @@ class ModuleOptions extends AbstractOptions
     public function getSmartyOptions()
     {
         return $this->smartyOptions;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getUseSmartyBc()
+    {
+        return $this->useSmartyBc;
+    }
+
+    /**
+     * @param boolean $useSmartyBc
+     */
+    public function setUseSmartyBc($useSmartyBc)
+    {
+        $this->useSmartyBc = $useSmartyBc;
     }
 
     /**

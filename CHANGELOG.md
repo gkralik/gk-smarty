@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 ### Changed
 - Update Smarty dependency: require `3.1.*`
+- HelperPluginManger: inject ServiceLocator to prevent deprecation notice in ZF >= 2.5
 
 ## [1.0.0] - 2015-10-10
 ### Changed

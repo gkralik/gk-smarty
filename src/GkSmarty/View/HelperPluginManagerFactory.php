@@ -33,6 +33,7 @@ class HelperPluginManagerFactory implements FactoryInterface
 
         $zfManager = $serviceLocator->get('ViewHelperManager');
         $smartyManager = new HelperPluginManager(new Config($smartyManagerOptions));
+        $smartyManager->setServiceLocator($serviceLocator);
         $smartyManager->addPeeringServiceManager($zfManager);
 
         foreach ($smartyManagerConfigs as $configClass) {

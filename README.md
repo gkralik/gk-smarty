@@ -2,6 +2,12 @@
 
 GkSmarty is a module for integrating the [Smarty](http://www.smarty.net) template engine with [Zend Framework 2](http://framework.zend.com).
 
+*If you like/use the extension and want to donate:*
+```
+LTC: LQ9XajbxJY2wxC44dwHTLCQCjoAmx2Uvfg
+BTC: 188v8pWMHigH9dGahdxPyhYJntanzhQEbY
+```
+
 ## Installation with Composer
 
 Installing via [Composer](http://getcomposer.org) is the only supported method.

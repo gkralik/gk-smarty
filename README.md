@@ -5,7 +5,7 @@ GkSmarty is a module for integrating the [Smarty](http://www.smarty.net) templat
 *If you like/use the extension and want to donate:*
 ```
 LTC: LQ9XajbxJY2wxC44dwHTLCQCjoAmx2Uvfg
-BTC: 188v8pWMHigH9dGahdxPyhYJntanzhQEbY
+BTC: 18edm8meRzxYn2znxHYj1McjvWvV53GTAY
 ```
 
 ## Installation with Composer

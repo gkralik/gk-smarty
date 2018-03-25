@@ -16,9 +16,9 @@ use Zend\View\ViewEvent;
 class SmartyStrategy implements ListenerAggregateInterface
 {
     /**
-     * @var \Zend\Stdlib\CallbackHandler[]
+     * @var array
      */
-    protected $listeners = array();
+    protected $listeners = [];
 
     /**
      * @var SmartyRenderer
@@ -59,9 +59,8 @@ class SmartyStrategy implements ListenerAggregateInterface
     public function detach(EventManagerInterface $events)
     {
         foreach($this->listeners as $index => $listener) {
-            if($events->detach($listener)) {
-                unset($this->listeners[$index]);
-            }
+            $events->detach($listener);
+            unset($this->listeners[$index]);
         }
     }
 

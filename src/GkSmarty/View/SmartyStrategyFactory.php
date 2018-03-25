@@ -9,20 +9,22 @@
 namespace GkSmarty\View;
 
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 class SmartyStrategyFactory implements FactoryInterface
 {
-
     /**
-     * Create service
+     * @param ContainerInterface $container
+     * @param string             $requestedName
+     * @param array|null         $options
      *
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return mixed
+     * @return SmartyStrategy|object
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        return new SmartyStrategy($serviceLocator->get('GkSmartyRenderer'));
+        return new SmartyStrategy($container->get('GkSmartyRenderer'));
     }
 }

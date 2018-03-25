@@ -9,24 +9,26 @@
 namespace GkSmarty\Smarty;
 
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\View\Resolver\AggregateResolver;
 
 class SmartyResolverFactory implements FactoryInterface
 {
-
     /**
-     * Create service
+     * @param ContainerInterface $container
+     * @param string             $requestedName
+     * @param array|null         $options
      *
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return mixed
+     * @return object|AggregateResolver
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         $resolver = new AggregateResolver();
-        $resolver->attach($serviceLocator->get('GkSmartyTemplateMapResolver'));
-        $resolver->attach($serviceLocator->get('GkSmartyTemplatePathStack'));
+        $resolver->attach($container->get('GkSmartyTemplateMapResolver'));
+        $resolver->attach($container->get('GkSmartyTemplatePathStack'));
 
         return $resolver;
     }

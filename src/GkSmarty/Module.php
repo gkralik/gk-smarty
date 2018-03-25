@@ -9,9 +9,7 @@
 namespace GkSmarty;
 
 
-use Zend\ModuleManager\Feature\ConfigProviderInterface;
-
-class Module implements ConfigProviderInterface
+class Module
 {
 
     /**
@@ -23,4 +21,5 @@ class Module implements ConfigProviderInterface
     {
         return include __DIR__ . '/../../config/module.config.php';
     }
+
 }

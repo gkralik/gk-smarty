@@ -95,11 +95,13 @@ class SmartyRenderer implements RendererInterface, TreeRendererInterface
      * Processes a view script and returns the output.
      *
      * @param  string|ModelInterface $nameOrModel The script/resource process, or a view model
-     * @param  array|\ArrayAccess $values Values to use during rendering
-     * @throws \Zend\View\Exception\DomainException
+     * @param  array|\ArrayAccess    $values      Values to use during rendering
+     *
      * @return string The script output.
+     * @throws \Exception
+     * @throws \SmartyException
      */
-    public function render($nameOrModel, $values = array())
+    public function render($nameOrModel, $values = null)
     {
         $model = null;
         if ($nameOrModel instanceof ModelInterface) {

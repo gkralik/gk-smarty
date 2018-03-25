@@ -9,6 +9,9 @@
 namespace GkSmarty\View;
 
 
+use Zend\ServiceManager\Factory\InvokableFactory;
+use Zend\View\Helper\Doctype;
+
 class HelperPluginManager extends \Zend\View\HelperPluginManager
 {
     /**
@@ -18,6 +21,7 @@ class HelperPluginManager extends \Zend\View\HelperPluginManager
      */
     protected $factories = array(
         'flashmessenger' => 'Zend\View\Helper\Service\FlashMessengerFactory',
+        Doctype::class => InvokableFactory::class,
     );
 
     /**

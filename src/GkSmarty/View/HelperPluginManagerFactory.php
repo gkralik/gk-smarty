@@ -9,34 +9,37 @@
 namespace GkSmarty\View;
 
 
+use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Config;
 use Zend\ServiceManager\ConfigInterface;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\View\Exception;
 
 class HelperPluginManagerFactory implements FactoryInterface
 {
-
     /**
-     * Create service
+     * @param ContainerInterface $container
+     * @param string             $requestedName
+     * @param array|null         $options
      *
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return mixed
+     * @return HelperPluginManager|object
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         /** @var \GkSmarty\ModuleOptions $options */
-        $options = $serviceLocator->get('GkSmarty\ModuleOptions');
-        $smartyManagerOptions = $options->getHelperManager();
-        $smartyManagerConfigs = isset($smartyManagerOptions['configs']) ? $smartyManagerOptions['configs'] : array();
+        //$options              = $container->get('GkSmarty\ModuleOptions');
+        //$smartyManagerOptions = $options->getHelperManager();
+        //$smartyManagerConfigs = isset($smartyManagerOptions['configs']) ? $smartyManagerOptions['configs'] : array();
 
-        $zfManager = $serviceLocator->get('ViewHelperManager');
-        $smartyManager = new HelperPluginManager(new Config($smartyManagerOptions));
-        $smartyManager->setServiceLocator($serviceLocator);
-        $smartyManager->addPeeringServiceManager($zfManager);
+//        $zfManager     = $container->get('ViewHelperManager');
+        //$smartyManager = new HelperPluginManager(new Config($smartyManagerOptions));
+        $smartyManager = new HelperPluginManager($container);
+//        $smartyManager->setServiceLocator($serviceLocator);
+//        $smartyManager->addPeeringServiceManager($zfManager);
 
-        foreach ($smartyManagerConfigs as $configClass) {
+        /*foreach ($smartyManagerConfigs as $configClass) {
             if (is_string($configClass) && class_exists($configClass)) {
                 $config = new $configClass;
 
@@ -52,8 +55,11 @@ class HelperPluginManagerFactory implements FactoryInterface
 
                 $config->configureServiceManager($smartyManager);
             }
-        }
+        }*/
+
+        // FIXME allow custom helper definitions
 
         return $smartyManager;
     }
+
 }

@@ -29,17 +29,15 @@ class HelperPluginManagerFactory implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         /** @var \GkSmarty\ModuleOptions $options */
-        //$options              = $container->get('GkSmarty\ModuleOptions');
-        //$smartyManagerOptions = $options->getHelperManager();
-        //$smartyManagerConfigs = isset($smartyManagerOptions['configs']) ? $smartyManagerOptions['configs'] : array();
+        $options              = $container->get('GkSmarty\ModuleOptions');
+        $smartyManagerOptions = $options->getHelperManager();
+        $smartyManagerConfigs = isset($smartyManagerOptions['configs']) ? $smartyManagerOptions['configs'] : array();
 
-//        $zfManager     = $container->get('ViewHelperManager');
-        //$smartyManager = new HelperPluginManager(new Config($smartyManagerOptions));
-        $smartyManager = new HelperPluginManager($container);
-//        $smartyManager->setServiceLocator($serviceLocator);
-//        $smartyManager->addPeeringServiceManager($zfManager);
+        /** @var \Zend\View\HelperPluginManager $zfManager */
+        $zfManager     = $container->get('ViewHelperManager');
+        $smartyManager = clone $zfManager;
 
-        /*foreach ($smartyManagerConfigs as $configClass) {
+        foreach ($smartyManagerConfigs as $configClass) {
             if (is_string($configClass) && class_exists($configClass)) {
                 $config = new $configClass;
 
@@ -55,11 +53,8 @@ class HelperPluginManagerFactory implements FactoryInterface
 
                 $config->configureServiceManager($smartyManager);
             }
-        }*/
-
-        // FIXME allow custom helper definitions
+        }
 
         return $smartyManager;
     }
-
 }
